@@ -23,6 +23,7 @@ if __name__ == "__main__":
     random.shuffle(pos)
     random.shuffle(neg)
 
+    # divide both in half then combine pos and neg
     training = pos[:len(pos)//2] + neg[:len(neg)//2]
     testing = pos[len(pos)//2:] + neg[len(neg)//2:]
 
@@ -30,13 +31,10 @@ if __name__ == "__main__":
     random.shuffle(training)
     random.shuffle(testing)
 
-    # write to file
-    testing_data = open("testing_data.csv", 'w')
-    for test in testing:
-        testing_data.write(str(test) + "\n")
-    testing_data.close()
-    training_data = open("training_data.csv", 'w')
-    for train in training:
-        training_data.write(str(train) + "\n")
-    training_data.close()
+    # write data to file
+    training = np.array(training)
+    testing = np.array(testing)
+    np.savetxt("training_data.csv", training, delimiter=',')
+    np.savetxt("testing_data.csv", testing, delimiter=',')
+
 
